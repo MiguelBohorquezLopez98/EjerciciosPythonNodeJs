@@ -40,3 +40,29 @@ def buscar(id):
     except sqlite3.Error as err:
         print('Ha ocurrido un error', err)
     return datos
+
+def modificar(id, nombre, apellidos, empresa, telefono, email, direccion):
+    try:
+        con = conectar()
+        cursor = con.cursor()
+        sentencia_sql = ''' UPDATE contacto SET nombre=?, apellidos=?, empresa=?, telefono=?, email=?, direccion=? WHERE id=? '''
+        datos = (nombre, apellidos, empresa, telefono, email, direccion, id)
+        cursor.execute(sentencia_sql, datos)
+        con.commit()
+        con.close()
+        return "Se actualizó correctamente"
+    except sqlite3.Error as err:
+        print('Ha ocurrido un error', err)
+
+def eliminar(id):
+    try:
+        con = conectar()
+        cursor = con.cursor()
+        sentencia_sql = ''' DELETE FROM contacto WHERE id=? '''
+        cursor.execute(sentencia_sql, (id,))
+        con.commit()
+        con.close()
+        return "Se eliminó correctamente"
+    except sqlite3.Error as err:
+        print('Ha ocurrido un error', err)
+
