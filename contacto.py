@@ -20,9 +20,10 @@ def mostrar():
     try:
         con = conectar()
         cursor = con.cursor()
-        sentencia_sql = ''' SELECT * FROM contactos'''
+        sentencia_sql = ''' SELECT * FROM contacto'''
         cursor.execute(sentencia_sql)
         datos = cursor.fetchall()
         con.close()
     except sqlite3.Error as err:
-        print('Ha ocurrido un error')
+        print('Ha ocurrido un error', err)
+    return datos
