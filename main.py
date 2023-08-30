@@ -1,4 +1,5 @@
 import os
+from tabulate import tabulate
 from conexion import *
 from contacto import *
 
@@ -17,18 +18,27 @@ def iniciar():
     opcion = input('Escoja una opción: ')
     if opcion == '1':
         nuevo_contacto()
-    # elif opcion == '2':
-    #     mostrar_contactos()
+    elif opcion == '2':
+        ver_contactos()
+
+   
     
 
-    def nuevo_contacto():
-        nombre = input('Ingrese el nombre: ')
-        apellidos = input('Ingrese el apellido: ')
-        empresa = input('Ingrese la empresa: ')
-        telefono = input('Ingrese el telefono: ')
-        email = input('Ingrese el email: ')
-        direccion = input('Ingrese la direccion: ')
-        respuesta = registrar(nombre, apellidos, empresa, telefono, email, direccion)
-        print(respuesta)
+def nuevo_contacto():
+    nombre = input('Ingrese el nombre: ')
+    apellidos = input('Ingrese el apellido: ')
+    empresa = input('Ingrese la empresa: ')
+    telefono = input('Ingrese el telefono: ')
+    email = input('Ingrese el email: ')
+    direccion = input('Ingrese la direccion: ')
+    respuesta = registrar(nombre, apellidos, empresa, telefono, email, direccion)
+    print(respuesta)
+
+
+def ver_contactos():
+    datos = mostrar()
+    headers = ['ID', 'NOMBRES', 'APELLIDOS', 'EMPRESA', 'TELEFONO', 'EMAIL', 'DIRECCION']
+    tabla = tabulate(datos, headers, tablefmt='fancy_grid')
+    print(tabla)
 
 iniciar()
